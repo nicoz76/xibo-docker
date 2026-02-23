@@ -37,6 +37,11 @@ services:
         env_file: config.env
         ports:
             - "80:80"
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.xibo.rule=Host(`xibo.votredomaine.com`)"
+            - "traefik.http.routers.xibo.entrypoints=websecure"
+            - "traefik.http.routers.xibo.tls.certresolver=myresolver"
         mem_limit: 1g
     cms-memcached:
         image: memcached:alpine
